@@ -1,0 +1,124 @@
+@charset "UTF-8";
+*{
+	margin:0;
+	padding:0;
+	
+	
+}
+.navbar {
+  background-color: #0d3b66;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* ⬅️ Properly space nav items and logout */
+  padding: 0 20px; /* Add horizontal spacing */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar ul {
+  display: flex;
+  flex-direction: row;
+  gap: 30px; /* space between list items */
+}
+
+.navbar ul li {
+  list-style: none;
+  font-size: 26px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.navbar ul li input {
+  height: 25px;
+  border-radius: 5px;
+}
+
+.logOutDiv {
+  display: flex;
+  align-items: center;
+}
+
+.logOutDiv a {
+  background-color: yellow;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+.logOutDiv h2{
+	
+	color:white;
+	margin-right:10px;
+}
+.navbar ul li span{
+	color:white;
+
+	}
+
+
+.mainContainer
+{
+	max-width:100%;
+	background-color:#faf0ca;
+	min-height:100vh;
+	padding:12px;
+	margin:15px;
+	border-radius:10px;
+	 overflow: auto;
+}
+
+.headingUser
+{
+	text-align: center;
+	font-size: 28px;
+	color: #0d3b66;
+	margin-bottom: 20px;
+}
+
+.userTable {
+  margin: 20px auto;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 18px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  table-layout: fixed;
+}
+
+.userTable thead {
+  background-color: #0d3b66;
+  color: white;
+}
+
+.userTable th, .userTable td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+.eventBtn a{
+	width:120px;
+	padding:12px;
+	font-size:16px;
+	margin:12px;
+	display:inline-block;
+	background-color: #00dd00;
+	color:white;
+	border-radius:5px;
+	cursor:pointer;
+	text-align:center;
+	text-decoration: none;
+	 font-weight: bold;
+}
+.btnDiv
+{
+	display:flex;
+}
+
+span a{
+	text-decoration: none;
+	background-color:white;
+	padding:6px;
+	border-radius:5px;
+}
