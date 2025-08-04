@@ -10,6 +10,8 @@ public class Attendee
 	private String password;
 	private String mobile;
 	private InputStream image;
+	private String imagePath;
+	private String imageName;
 	
 	public int getId() {
 		return id;
@@ -47,5 +49,19 @@ public class Attendee
 	public void setImage(InputStream image) {
 		this.image = image;
 	}
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+	public String getImageName() {
+		return imageName;
+	}
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+	
+	
 	
 }

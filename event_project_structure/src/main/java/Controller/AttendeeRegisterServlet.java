@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -75,7 +76,22 @@ public class AttendeeRegisterServlet extends HttpServlet {
 		        imageStream = image.getInputStream();
 		    }
 		
-		
+		    String fileName = image.getSubmittedFileName().toString();
+			System.out.println("fileName "+fileName);
+			
+			String uploadsFolder = "C:/Users/Swetha Nagarajan/eclipse-workspace/event_project_structure/WebContent/attendee";
+		    System.out.println("Target Save Path: " + uploadsFolder);
+		    
+		    File uploadsDir = new File(uploadsFolder);
+		    if (!uploadsDir.exists()) {
+		        uploadsDir.mkdirs(); // create the folder if it doesn't exist
+		    }
+		    
+		    File savedFile = new File(uploadsDir, fileName);
+		    image.write(savedFile.getAbsolutePath()); // write the file to disk
+
+		    System.out.println("File saved at: " + savedFile.getAbsolutePath());
+
 
 		
 		Attendee attendee = new Attendee();
@@ -84,8 +100,8 @@ public class AttendeeRegisterServlet extends HttpServlet {
 		attendee.setEmail(email);
 		attendee.setPassword(password);
 		attendee.setMobile(mobile);
-		
-
+		attendee.setImagePath("uploads/" + fileName);
+		attendee.setImageName(fileName);
 		
 		boolean result = attendeeRegisterService.insertAttendee(attendee,imageStream);
 

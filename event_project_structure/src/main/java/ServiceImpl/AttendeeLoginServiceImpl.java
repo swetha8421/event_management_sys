@@ -16,7 +16,7 @@ public class AttendeeLoginServiceImpl implements AttendeeLoginService {
 	}
 
 	
-	public byte[] getAttendeeImageById(int attendeeId) 
+	public String getAttendeeImageById(int attendeeId) 
 	{
 		return attendeeLoginDao.getAttendeeImageById(attendeeId);
 	}

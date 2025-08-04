@@ -48,7 +48,7 @@
 
 			<div>
 				<h4>
-					Not Have a Account! Create One  <a href="Pages/attendeeRegister.jsp">Register</a>
+					Not Have a Account! Create One  <a href="attendeeRegister.jsp">Register</a>
 				</h4>
 				<a href="<%= request.getContextPath() %>/" style="padding: 8px 16px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Go to Home</a>
 			</div>

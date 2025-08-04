@@ -23,7 +23,7 @@ public class AttendeeRegisterDaoImpl  implements AttendeeRegisterDao{
 
 			String tableName="attendee";
 
-			String query = "INSERT INTO "+tableName+" (name,email,password,mobile,image) VALUES (?,?,?,?,?)";
+			String query = "INSERT INTO "+tableName+" (name,email,password,mobile,image,image_path,image_name) VALUES (?,?,?,?,?,?,?)";
 
 			pstmt = conn.prepareStatement(query);
 
@@ -38,10 +38,11 @@ public class AttendeeRegisterDaoImpl  implements AttendeeRegisterDao{
 			}
 			else 
 			{
-				pstmt.setNull(6, Types.BINARY);
+				pstmt.setNull(5, Types.BINARY);
 			}
 
-
+			pstmt.setString(6, attendee.getImagePath());
+			pstmt.setString(7, attendee.getImageName());
 			int rowsUpdated = pstmt.executeUpdate();
 			if(rowsUpdated>0) {
 				return true;

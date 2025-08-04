@@ -65,15 +65,15 @@ public class AttendeeLoginDaoImpl implements AttendeeLoginDao
 
 	}
 	
-	public byte[] getAttendeeImageById(int attendeeId) 
+	public String getAttendeeImageById(int attendeeId) 
 	{
-		byte[] imageData=null;
+		String imageData=null;
 		try 
 		{
 			Connection_Db obj = new Connection_Db();
 			Connection conn = obj.connect_to_db();
 			
-			String query = "SELECT image FROM attendee WHERE id = ?";
+			String query = "SELECT image_path FROM attendee WHERE id = ?";
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			
 			pstmt.setInt(1,attendeeId);
@@ -84,7 +84,7 @@ public class AttendeeLoginDaoImpl implements AttendeeLoginDao
 			
 			if(rs.next()) 
 			{
-				imageData = rs.getBytes("image");
+				imageData = rs.getString("image_path");
 				
 			}
 			else 
