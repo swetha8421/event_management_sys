@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+body{
+	background-color:#00246B;
+	
+}
+.heading  	{
+	text-align: center;
+	margin: 10px;
+	font-size: 1.5em;
+	font-weight: bold;
+	color:white;
+	text-decoration: underline;
+	text-underline-offset: 6px;
+	text-decoration-color: #CADCFC;
+	
+}
+.container 
+{
+	
+    max-width: 500px;
+    margin: 60px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    background-color:#CADCFC;
+    border:3px solid darkblue;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    align-items:centre;
+    margin-bottom: 20px;
+}
+
+
+h2 {
+    text-align: center;
+    align-items:centre;
+    margin-bottom: 20px;
+}
+
+.buttons 
+{
+	text-align:center;
+	margin:30px;
+	
+	
+	 
+	
+}
+
+.buttons a{
+	padding:15px;
+	 width:150px;
+	text-decoration:none;
+	border-radius:8px;
+	color:black;
+	margin:5px;
+	
+	
+	
+	
+}
+
+.org
+{
+	background-color: pink;
+	
+	
+}
+.attendee{
+	background-color: yellow;
+}
