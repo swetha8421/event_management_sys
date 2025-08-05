@@ -1,9 +1,9 @@
 package DaoImpl;
 
-import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Types;
+
 
 import Dao.AttendeeRegisterDao;
 import Model.Attendee;
@@ -12,7 +12,7 @@ import Utility_folder.Connection_Db;
 public class AttendeeRegisterDaoImpl  implements AttendeeRegisterDao{
 
 
-	public boolean insertAttendee(Attendee attendee,InputStream imageStream)
+	public boolean insertAttendee(Attendee attendee)
 	{
 		PreparedStatement pstmt;
 		try
@@ -23,7 +23,7 @@ public class AttendeeRegisterDaoImpl  implements AttendeeRegisterDao{
 
 			String tableName="attendee";
 
-			String query = "INSERT INTO "+tableName+" (name,email,password,mobile,image,image_path,image_name) VALUES (?,?,?,?,?,?,?)";
+			String query = "INSERT INTO "+tableName+" (name,email,password,mobile,image_path,image_name) VALUES (?,?,?,?,?,?)";
 
 			pstmt = conn.prepareStatement(query);
 
@@ -32,17 +32,10 @@ public class AttendeeRegisterDaoImpl  implements AttendeeRegisterDao{
 			pstmt.setString(3, attendee.getPassword());
 			pstmt.setString(4, attendee.getMobile());
 			
-			if(imageStream != null) 
-			{
-				pstmt.setBinaryStream(5,imageStream,imageStream.available());
-			}
-			else 
-			{
-				pstmt.setNull(5, Types.BINARY);
-			}
+			
 
-			pstmt.setString(6, attendee.getImagePath());
-			pstmt.setString(7, attendee.getImageName());
+			pstmt.setString(5, attendee.getImagePath());
+			pstmt.setString(6, attendee.getImageName());
 			int rowsUpdated = pstmt.executeUpdate();
 			if(rowsUpdated>0) {
 				return true;

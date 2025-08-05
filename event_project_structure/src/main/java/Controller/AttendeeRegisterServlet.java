@@ -60,7 +60,7 @@ public class AttendeeRegisterServlet extends HttpServlet {
 		
 		
 		
-		 InputStream imageStream = null;
+		 
 		    if (image != null && image.getSize() > 0) {
 		        String contentType = image.getContentType();
 		        long size = image.getSize();
@@ -73,7 +73,7 @@ public class AttendeeRegisterServlet extends HttpServlet {
 		            response.sendRedirect("Pages/attendeeRegister.jsp?error=imageTooLarge");
 		            return;
 		        }
-		        imageStream = image.getInputStream();
+		 
 		    }
 		
 		    String fileName = image.getSubmittedFileName().toString();
@@ -103,7 +103,7 @@ public class AttendeeRegisterServlet extends HttpServlet {
 		attendee.setImagePath("uploads/" + fileName);
 		attendee.setImageName(fileName);
 		
-		boolean result = attendeeRegisterService.insertAttendee(attendee,imageStream);
+		boolean result = attendeeRegisterService.insertAttendee(attendee);
 
 		if(result) {
 			response.sendRedirect("Pages/attendeeLogin.jsp");

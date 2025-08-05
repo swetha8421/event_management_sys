@@ -11,9 +11,9 @@ public class AttendeeRegisterServiceImpl implements AttendeeRegisterService
 {
 	private AttendeeRegisterDao attendeeRegisterDao = new AttendeeRegisterDaoImpl();
 	
-	public boolean insertAttendee(Attendee attendee, InputStream imageStream) 
+	public boolean insertAttendee(Attendee attendee) 
 	{
-		return attendeeRegisterDao.insertAttendee(attendee, imageStream);
+		return attendeeRegisterDao.insertAttendee(attendee);
 		
 	}
 	

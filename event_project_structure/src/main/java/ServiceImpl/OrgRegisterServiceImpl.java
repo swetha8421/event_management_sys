@@ -1,6 +1,6 @@
 package ServiceImpl;
 
-import java.io.InputStream;
+
 
 import Model.Organizer;
 import Service.OrgRegisterService;
@@ -10,9 +10,9 @@ public class OrgRegisterServiceImpl implements OrgRegisterService
 {
 	private OrgRegisterDao orgRegisterDao = new OrgRegisterDaoImpl();
 	@Override
-	public boolean insertOrganizer(Organizer organizer, InputStream imageStream) {
+	public boolean insertOrganizer(Organizer organizer) {
 		
-		return orgRegisterDao.insertOrganizer(organizer, imageStream);
+		return orgRegisterDao.insertOrganizer(organizer);
 	}
 
 }

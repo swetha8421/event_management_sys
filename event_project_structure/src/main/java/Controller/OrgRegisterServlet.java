@@ -2,7 +2,7 @@ package Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+
 
 import Service.OrgRegisterService;
 import ServiceImpl.OrgRegisterServiceImpl;
@@ -56,11 +56,7 @@ public class OrgRegisterServlet extends HttpServlet
 		        response.sendRedirect("Pages/orgRegister.jsp?error=invalidPhone");
 		        return;
 		    }
-		
-	
-		
-		 InputStream imageStream = null;
-		    if (image != null && image.getSize() > 0) {
+		if (image != null && image.getSize() > 0) {
 		        String contentType = image.getContentType();
 		        long size = image.getSize();
 
@@ -72,7 +68,7 @@ public class OrgRegisterServlet extends HttpServlet
 		            response.sendRedirect("Pages/orgRegister.jsp?error=imageTooLarge");
 		            return;
 		        }
-		        imageStream = image.getInputStream();
+		        
 		    }
 		
 		
@@ -105,7 +101,7 @@ public class OrgRegisterServlet extends HttpServlet
 		 organizer.setImagePath("uploads/" + fileName); 
 		
 		
-		boolean result = orgRegisterService.insertOrganizer(organizer,imageStream);
+		boolean result = orgRegisterService.insertOrganizer(organizer);
 
 		if(result) {
 			response.sendRedirect("Pages/orgLogin.jsp");

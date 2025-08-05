@@ -12,7 +12,7 @@
 	<nav class="navbar">
 		<ul>
 			<li>
-				<a href="Pages/attendeeHomePage.jsp">
+				<a href="attendeeHomePage.jsp">
 					<i class="fas fa-house" style="margin-right:5px; color:white; "></i>
 				</a>
 			</li>
@@ -20,7 +20,7 @@
 		</ul>
 		<div class="logOutDiv">
 			<h2>Welcome <%= session.getAttribute("attendee_name")%></h2>
-			<a href="Pages/attendeeLogin.jsp">Logout</a>			
+			<a href="attendeeLogin.jsp">Logout</a>			
 		</div>
 	</nav>
 	<div class="containerBox">

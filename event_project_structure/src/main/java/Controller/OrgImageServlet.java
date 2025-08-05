@@ -27,7 +27,7 @@ public class OrgImageServlet extends HttpServlet
 		
 		if (imageData != null) {
 
-			String absolutePath = getServletContext().getRealPath("/" + imageData);
+			String absolutePath  = "C:/Users/Swetha Nagarajan/eclipse-workspace/event_project_structure/WebContent/"+imageData;
 			File imageFile = new File(absolutePath);
 
 			if (imageFile.exists()) {

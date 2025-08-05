@@ -31,7 +31,7 @@ public class ViewFeedbackServlet extends HttpServlet
 		else 
 		{
 			request.setAttribute("message", "Failed to delete event");
-			request.getRequestDispatcher("Pages/attendeeHomePge.jsp").forward(request, response);
+			request.getRequestDispatcher("Pages/attendeeHomePage.jsp").forward(request, response);
 			
 		}
 	}
