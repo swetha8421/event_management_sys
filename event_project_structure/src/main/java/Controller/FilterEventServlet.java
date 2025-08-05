@@ -36,14 +36,11 @@ public class FilterEventServlet extends HttpServlet {
         String filterTypeParam = request.getParameter("filterType");
         String filterStatusParam = request.getParameter("filterStatus");
         String searchItem = request.getParameter("search");
-
-        Integer filterType = (filterTypeParam != null && !filterTypeParam.isEmpty()) ? Integer.parseInt(filterTypeParam) : null;
-        Integer filterStatus = (filterStatusParam != null && !filterStatusParam.isEmpty()) ? Integer.parseInt(filterStatusParam) : null;
-        
-        
         String startDateParam = request.getParameter("startDate");
         String endDateParam = request.getParameter("endDate");
-
+        
+        Integer filterType = (filterTypeParam != null && !filterTypeParam.isEmpty()) ? Integer.parseInt(filterTypeParam) : null;
+        Integer filterStatus = (filterStatusParam != null && !filterStatusParam.isEmpty()) ? Integer.parseInt(filterStatusParam) : null;
         java.sql.Date startDate = (startDateParam != null && !startDateParam.isEmpty()) 
                 ? java.sql.Date.valueOf(startDateParam) 
                 : null;
@@ -51,11 +48,6 @@ public class FilterEventServlet extends HttpServlet {
         java.sql.Date endDate = (endDateParam != null && !endDateParam.isEmpty()) 
                 ? java.sql.Date.valueOf(endDateParam) 
                 : null;
-        
-        
-        
-        
-       
         List<Event> eventList = eventService.getFilteredEvents(organizerID, filterType, filterStatus,searchItem,startDate,endDate);
         
         request.setAttribute("eventTypes", eventService.getEventType());

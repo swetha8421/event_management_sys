@@ -50,7 +50,8 @@ public class EventServlet extends HttpServlet {
     	    
     	    
     	    try {
-    	        if ("edit".equalsIgnoreCase(action) && eventIdParam != null) {
+    	        if ("edit".equalsIgnoreCase(action) && eventIdParam != null) 
+    	        {
     	            int eventId = Integer.parseInt(eventIdParam);
     	            Event event = eventService.getEventById(eventId);
 
@@ -140,9 +141,6 @@ public class EventServlet extends HttpServlet {
 		
 		 
 		boolean result = eventService.insert(event);
-
-
-		
 		if(result) 
 		{
 			System.out.println(event);
@@ -161,7 +159,7 @@ public class EventServlet extends HttpServlet {
 		request.setAttribute("eventList", events);
 		request.getRequestDispatcher("Pages/viewEvents.jsp").forward(request, response);
 		
-}
+		}
 	
 	
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -209,6 +207,7 @@ public class EventServlet extends HttpServlet {
 		event.setEventType(eventType);
 		event.setId(event_id);
 		event.setOrganizerId(organizerId);
+		
 		boolean result = eventService.updateEventById(event);
 		
 		if(result) 
