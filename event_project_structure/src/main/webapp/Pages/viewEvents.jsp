@@ -8,6 +8,7 @@
 <title>Home</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css?v=5">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<nav class="navbar">
@@ -20,9 +21,9 @@
 				
 			</li>
 			<li>
-			<form action="${pageContext.request.contextPath}/FilterEventServlet" method="get" style="display: flex; gap: 10px;">
+			<div style="display: flex; gap: 10px;">
 				<!-- Event Type Filter -->
-				<select name="filterType">
+				<select name="filterType" id="filterType">
 					<option value="">All Types</option>
 					<%
 						List<Model.EventType> eventTypes = (List<Model.EventType>) request.getAttribute("eventTypes");
@@ -43,7 +44,7 @@
 				</select>
 
 				<!-- Event Status Filter -->
-				<select name="filterStatus">
+				<select name="filterStatus" id="filterStatus">
 					<option value="">All Statuses</option>
 					<%
 						List<Model.EventStatus> eventStatuses = (List<Model.EventStatus>) request.getAttribute("eventStatuses");
@@ -62,23 +63,23 @@
 					%>
 				</select>
 				
-				<input type="text" name="search" placeholder="Search by name or location" 
+				<input type="text" name="search" placeholder="Search by name or location"  id="searchFilter"
        value="<%= request.getAttribute("searchTerm") != null ? request.getAttribute("searchTerm") : "" %>">
        
        
-		<input type="date" name="startDate" placeholder="start date"
+		<input type="date" name="startDate" placeholder="start date" id="startDate"
        				value="<%= request.getAttribute("selectedStartDate") != null ? request.getAttribute("selectedStartDate") : "" %>" />to
 
 
-		<input type="date" name="endDate" placeholder="end Date"
+		<input type="date" name="endDate" placeholder="end Date" id="endDate"
        			value="<%= request.getAttribute("selectedEndDate") != null ? request.getAttribute("selectedEndDate") : "" %>" />
 
 				<!-- Submit Button -->
-				<button type="submit" style="padding: 3px 10px;">Filter</button>
+				<button id="filterBtn" type="submit" style="padding: 3px 10px;">Filter</button>
 				
 				
 				
-			</form>
+			</div>
 			
 		</li>
 						
@@ -95,8 +96,8 @@
 
 	<div class="containerBox">
 		<div class="mainContainer">
-					<div class="eventTable">
-				<table border=1>
+					<div class="eventTable" >
+				<table border=1 id="eventTableBody">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -160,5 +161,76 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+			function loadEvents(filterType,filterStatus,startDate,endDate,searchFilter)
+			{
+				$.ajax({
+					url:"<%=request.getContextPath() %>/FilterEventServlet",
+					method:"GET",
+					data:{
+						filterType:filterType,
+						filterStatus:filterStatus,
+						startDate:startDate,
+						endDate:endDate,
+						search:searchFilter
+					},
+					dataType:"json",
+					success:function(data)
+					{
+						let tableBody = $("#eventTableBody tbody");
+						console.log("Data",data);
+						tableBody.empty();
+						try{
+							data.forEach(function(event)
+									{
+										let row = $("<tr>");
+										row.append(
+												 $("<td>").text(event.id),
+									                $("<td>").text(event.name),
+									                $("<td>").text(event.location),
+									                $("<td>").text(event.startDate),
+									                $("<td>").text(event.endDate),
+									                $("<td>").text(event.event_type),
+									                $("<td>").text(event.event_status),
+											      $("<td>").html(`
+											        <a href="${pageContext.request.contextPath}/EventServlet?action=edit&eventId=${event.id}" title="Edit"><i class="fas fa-edit"></i></a>
+											        <a href="${pageContext.request.contextPath}/DeleteEventServlet?eventId=${event.id}" 
+											          onclick="return confirm('Are you sure you want to delete this event?');" 
+											          title="Delete">
+											          <i class="fas fa-trash-alt" style="color: red; margin-left:5px;"></i>
+											        </a>
+											        <a href="${pageContext.request.contextPath}/AddAttendeeServlet?eventId=${event.id}" title="addAttendee"><i class="fas fa-user-plus" style="margin-left:5px;"></i></a>
+											      `)
+											    );
+											    tableBody.append(row);
+									});
+						}
+						catch(e)
+						{
+							console.error("Error Handling Rows");
+						}
+					},
+					error:function(xhr,status,erro)
+					{
+						console.error("AJAX Error ",status,error);
+					}
+				});
+			}
+			$(document).ready(function(){
+				$("#filterBtn").on("click",function()
+						{
+					 
+							const selectedType = $("#filterType").val();
+							const selectedStatus =$("#filterStatus").val();
+							const selectedSearch = $("#searchFilter").val();
+							const selectedStartDate = $("#startDate").val();
+							const selectedEndDate = $("#endDate").val();
+							
+							console.log("Filter Clicked ",selectedType);
+							loadEvents(selectedType,selectedStatus,selectedStartDate,selectedEndDate,selectedSearch)
+						})
+			})
+	</script>
 </body>
 </html>

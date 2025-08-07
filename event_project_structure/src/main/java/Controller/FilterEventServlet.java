@@ -10,6 +10,10 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import Service.EventService;
 import ServiceImpl.EventServiceImpl;
 import Model.Event;
@@ -49,6 +53,35 @@ public class FilterEventServlet extends HttpServlet {
                 ? java.sql.Date.valueOf(endDateParam) 
                 : null;
         List<Event> eventList = eventService.getFilteredEvents(organizerID, filterType, filterStatus,searchItem,startDate,endDate);
+        
+        
+        String requestedWidth = request.getHeader("X-Requested-With");
+        if("XMLHttpRequest".equals(requestedWidth)) 
+        {
+        	System.out.println("Entered Into AJax");
+        	response.setContentType("application/json");
+        	response.setCharacterEncoding("UTF-8");
+        	
+        	Gson gson = new Gson();
+        	JsonArray jsonArray = new JsonArray();
+        	
+        	for(Event event:eventList) 
+        	{
+        		JsonObject jsonObj = new JsonObject();
+        		jsonObj.addProperty("id", event.getId());
+        		jsonObj.addProperty("name", event.getName());
+        		jsonObj.addProperty("location", event.getLocation());
+        		jsonObj.addProperty("startDate", event.getStartDate().toString());
+        		jsonObj.addProperty("endDate", event.getEndDate().toString());
+        		jsonObj.addProperty("event_status", event.getEvent_status());
+        		jsonObj.addProperty("event_type", event.getEvent_type());
+        		
+        		jsonArray.add(jsonObj);
+        	}
+        	response.getWriter().write(gson.toJson(jsonArray));
+        	return;
+        }
+        
         
         request.setAttribute("eventTypes", eventService.getEventType());
         request.setAttribute("eventStatuses", eventService.getEventStatus());
